@@ -32,9 +32,13 @@ class LabelApp(QtWidgets.QMainWindow):
 
     @frame_num.setter
     def frame_num(self, n):
-        if n < 0 or n >= self.video.get(cv2.CAP_PROP_FRAME_COUNT):
+        length = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
+        if n < 0 or n >= length:
             raise ValueError(f"There is no frame {n}")
         self._frame_num = n
+        self.setWindowTitle(
+            f"{os.path.basename(self.file)} [{self._frame_num + 1}/{length}]"
+        )
         self.enable_frame_buttons()
 
     def open_video(self):
