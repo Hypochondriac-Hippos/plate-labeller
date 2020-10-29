@@ -38,9 +38,15 @@ class LabelApp(QtWidgets.QMainWindow):
         self.enable_frame_buttons()
 
     def open_video(self):
-        self.file = QtWidgets.QFileDialog.getOpenFileName(
+        f = QtWidgets.QFileDialog.getOpenFileName(
             None, "Open Video", VIDEO_LOCATION, "Video Files (*.avi)"
         )[0]
+
+        if f == "":
+            return
+
+        self.file = f
+        enable_all(self)
 
         self.video = cv2.VideoCapture(self.file)
         self.frame_num = 0
@@ -64,7 +70,6 @@ class LabelApp(QtWidgets.QMainWindow):
     def next_frame(self):
         self.frame_num += 1
         self.show_frame()
-        print(self.frame_num)
 
     def prev_frame(self):
         self.frame_num -= 1
@@ -75,6 +80,13 @@ class LabelApp(QtWidgets.QMainWindow):
             self.frame_num + 1 < self.video.get(cv2.CAP_PROP_FRAME_COUNT)
         )
         self.prev_frame_button.setEnabled(self.frame_num > 0)
+
+
+def enable_all(widget):
+    """Recursively enable the widget and all its children"""
+    widget.setEnabled(True)
+    for child in widget.findChildren(QtWidgets.QWidget):
+        enable_all(child)
 
 
 if __name__ == "__main__":
