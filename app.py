@@ -21,7 +21,21 @@ class LabelApp(QtWidgets.QMainWindow):
 
         self.file = None
         self.video = None
+        self._frame_num = None
         self.action_open.triggered.connect(self.open_video)
+        self.next_frame_button.clicked.connect(self.next_frame)
+        self.prev_frame_button.clicked.connect(self.prev_frame)
+
+    @property
+    def frame_num(self):
+        return self._frame_num
+
+    @frame_num.setter
+    def frame_num(self, n):
+        if n < 0 or n >= self.video.get(cv2.CAP_PROP_FRAME_COUNT):
+            raise ValueError(f"There is no frame {n}")
+        self._frame_num = n
+        self.enable_frame_buttons()
 
     def open_video(self):
         self.file = QtWidgets.QFileDialog.getOpenFileName(
@@ -29,17 +43,14 @@ class LabelApp(QtWidgets.QMainWindow):
         )[0]
 
         self.video = cv2.VideoCapture(self.file)
-        self.show_frame(0)
+        self.frame_num = 0
+        self.show_frame()
 
-    def show_frame(self, n):
-        if n >= self.video.get(cv2.CAP_PROP_FRAME_COUNT):
-            print(f"There is no frame {n}")
-            return
-
-        self.video.set(cv2.CAP_PROP_POS_FRAMES, n)
+    def show_frame(self):
+        self.video.set(cv2.CAP_PROP_POS_FRAMES, self.frame_num)
         ret, frame = self.video.read()
         if not ret:
-            print(f"Can't display frame {n}")
+            print(f"Can't display frame {self.frame_num}")
             return
 
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -48,8 +59,22 @@ class LabelApp(QtWidgets.QMainWindow):
                 frame, frame.shape[1], frame.shape[0], QtGui.QImage.Format_RGB888
             )
         )
-        print(pixmap)
         self.frame.setPixmap(pixmap)
+
+    def next_frame(self):
+        self.frame_num += 1
+        self.show_frame()
+        print(self.frame_num)
+
+    def prev_frame(self):
+        self.frame_num -= 1
+        self.show_frame()
+
+    def enable_frame_buttons(self):
+        self.next_frame_button.setEnabled(
+            self.frame_num + 1 < self.video.get(cv2.CAP_PROP_FRAME_COUNT)
+        )
+        self.prev_frame_button.setEnabled(self.frame_num > 0)
 
 
 if __name__ == "__main__":
