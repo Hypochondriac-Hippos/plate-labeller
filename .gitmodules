@@ -1,0 +1,3 @@
+[submodule "cv2-video-wrapper"]
+	path = cv2-video-wrapper
+	url = git@github.com:wecassidy/cv2-video-wrapper.git
