@@ -11,6 +11,9 @@ import cv2
 from PyQt5 import QtGui, QtWidgets
 from python_qt_binding import loadUi
 
+import interesting
+import video
+
 VIDEO_LOCATION = os.path.expanduser("~/Videos/353_recordings")
 
 
@@ -20,8 +23,10 @@ class LabelApp(QtWidgets.QMainWindow):
         loadUi("labeller.ui", self)
 
         self.file = None
-        self.video = None
         self._frame_num = None
+        self.video = None
+        self.interesting_frames = None
+
         self.action_open.triggered.connect(self.open_video)
         self.next_frame_button.clicked.connect(self.next_frame)
         self.prev_frame_button.clicked.connect(self.prev_frame)
@@ -32,14 +37,14 @@ class LabelApp(QtWidgets.QMainWindow):
 
     @frame_num.setter
     def frame_num(self, n):
-        length = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
-        if n < 0 or n >= length:
+        if n < 0 or n >= len(self.interesting_frames):
             raise ValueError(f"There is no frame {n}")
         self._frame_num = n
         self.setWindowTitle(
-            f"{os.path.basename(self.file)} [{self._frame_num + 1}/{length}]"
+            f"{os.path.basename(self.file)} [{self._frame_num + 1}/{len(self.interesting_frames)}]"
         )
         self.enable_frame_buttons()
+        self.show_frame()
 
     def open_video(self):
         f = QtWidgets.QFileDialog.getOpenFileName(
@@ -52,18 +57,15 @@ class LabelApp(QtWidgets.QMainWindow):
         self.file = f
         enable_all(self)
 
-        self.video = cv2.VideoCapture(self.file)
+        self.video = video.VideoCapture(self.file)
+        self.interesting_frames = pick_frames(self.video)
+
         self.frame_num = 0
-        self.show_frame()
 
     def show_frame(self):
-        self.video.set(cv2.CAP_PROP_POS_FRAMES, self.frame_num)
-        ret, frame = self.video.read()
-        if not ret:
-            print(f"Can't display frame {self.frame_num}")
-            return
-
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.cvtColor(
+            self.video[self.interesting_frames[self.frame_num]], cv2.COLOR_BGR2RGB
+        )
         pixmap = QtGui.QPixmap.fromImage(
             QtGui.QImage(
                 frame, frame.shape[1], frame.shape[0], QtGui.QImage.Format_RGB888
@@ -73,15 +75,13 @@ class LabelApp(QtWidgets.QMainWindow):
 
     def next_frame(self):
         self.frame_num += 1
-        self.show_frame()
 
     def prev_frame(self):
         self.frame_num -= 1
-        self.show_frame()
 
     def enable_frame_buttons(self):
         self.next_frame_button.setEnabled(
-            self.frame_num + 1 < self.video.get(cv2.CAP_PROP_FRAME_COUNT)
+            self.frame_num + 1 < len(self.interesting_frames)
         )
         self.prev_frame_button.setEnabled(self.frame_num > 0)
 
@@ -91,6 +91,22 @@ def enable_all(widget):
     widget.setEnabled(True)
     for child in widget.findChildren(QtWidgets.QWidget):
         enable_all(child)
+
+
+def pick_frames(video):
+    """Return a list of indices of interesting frames."""
+    ret, frame = video.read()
+    if not ret:
+        raise RuntimeError("Couldn't read any frames")
+    indices = [0]
+    i, frame = interesting.read_to_interesting(video, frame)
+    l = len(video)
+    while frame is not None:
+        print(f"\r{i} / {l}", end="")
+        indices.append(i)
+        i, frame = interesting.read_to_interesting(video, frame)
+
+    return indices
 
 
 if __name__ == "__main__":
