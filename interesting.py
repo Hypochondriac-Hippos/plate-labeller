@@ -21,7 +21,11 @@ def is_similar(a, b, threshold=0.998):
 
     Returns: True if the frames are similar.
     """
-    return cv2.matchTemplate(a, b, cv2.TM_CCORR_NORMED).max() > threshold
+    return (
+        np.absolute((a - b) / np.iinfo(a.dtype).max).sum()
+        / (a.shape[0] * a.shape[1] * a.shape[2])
+        > threshold
+    )
 
 
 def read_to_interesting(video, frame, threshold=0.998):
@@ -48,7 +52,7 @@ def read_to_interesting(video, frame, threshold=0.998):
 
 
 if __name__ == "__main__":
-    file = os.path.expanduser("~/Videos/353_recordings/2020-10-29T21:22:56.avi")
+    file = os.path.expanduser("~/Videos/353_recordings/2020-10-29T20:47:44.avi")
     video = cv2.VideoCapture(file)
 
     frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
