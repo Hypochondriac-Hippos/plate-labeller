@@ -9,9 +9,10 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.ndimage.morphology import grey_erosion
 
 
-def is_similar(a, b, threshold=0.998):
+def is_similar(a, b, threshold=0.95):
     """
     Return a measure of similarity between two frames of a video.
 
@@ -21,14 +22,20 @@ def is_similar(a, b, threshold=0.998):
 
     Returns: True if the frames are similar.
     """
-    return (
-        np.absolute((a - b) / np.iinfo(a.dtype).max).sum()
-        / (a.shape[0] * a.shape[1] * a.shape[2])
-        > threshold
+    return compute_similarity(a, b) > threshold
+
+
+def compute_similarity(a, b):
+    grey_a = cv2.cvtColor(a, cv2.COLOR_BGR2GRAY)
+    grey_b = cv2.cvtColor(b, cv2.COLOR_BGR2GRAY)
+    errors = grey_erosion(grey_a - grey_b, size=(3, 3))
+
+    return 1 - np.sum(np.absolute(errors)) / (
+        np.iinfo(a.dtype).max * a.shape[0] * a.shape[1]
     )
 
 
-def read_to_interesting(video, frame, threshold=0.998):
+def read_to_interesting(video, frame, threshold=0.95):
     """
     Read through the video until the next sufficiently distinct frame, then return that frame.
 
@@ -66,9 +73,7 @@ if __name__ == "__main__":
         if not ret:
             break
 
-        similarities[i] = cv2.matchTemplate(
-            last_frame, frame, cv2.TM_CCORR_NORMED
-        ).max()
+        similarities[i] = compute_similarity(last_frame, frame)
         i += 1
         last_frame = frame
 
