@@ -4,6 +4,7 @@
 Application to label ENPH 353 license plate videos
 """
 
+import json
 import os
 import sys
 
@@ -28,6 +29,7 @@ class LabelApp(QtWidgets.QMainWindow):
         self.interesting_frames = None
 
         self.action_open.triggered.connect(self.open_video)
+        self.action_save.triggered.connect(self.save_labels)
         self.next_frame_button.clicked.connect(self.next_frame)
         self.prev_frame_button.clicked.connect(self.prev_frame)
 
@@ -104,7 +106,7 @@ class LabelApp(QtWidgets.QMainWindow):
         plates_in_frame = dict()
         for text_box in self.findChildren(QtWidgets.QLineEdit):
             i = int(text_box.objectName()[5])
-            text = text_box.text()
+            text = str(text_box.text())
             if text != "":
                 plates_in_frame[i] = text
 
@@ -112,6 +114,11 @@ class LabelApp(QtWidgets.QMainWindow):
             plates_in_frame = None
 
         self.labels[self.interesting_frames[self.frame_num]] = plates_in_frame
+
+    def save_labels(self):
+        """Write labels to a file."""
+        with open(f"{self.file}.json", "w") as f:
+            json.dump(self.labels, f)
 
 
 def enable_all(widget):
