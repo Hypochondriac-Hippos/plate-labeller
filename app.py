@@ -47,6 +47,7 @@ class LabelApp(QtWidgets.QMainWindow):
         )
         self.enable_frame_buttons()
         self.show_frame()
+        self.show_labels()
 
     def open_video(self):
         f = QtWidgets.QFileDialog.getOpenFileName(
@@ -88,6 +89,16 @@ class LabelApp(QtWidgets.QMainWindow):
             self.frame_num + 1 < len(self.interesting_frames)
         )
         self.prev_frame_button.setEnabled(self.frame_num > 0)
+
+    def show_labels(self):
+        """If labels are already recorded, make sure the text boxes match."""
+        frame = self.interesting_frames[self.frame_num]
+        if frame in self.labels:
+            labels = self.labels[frame]
+            for i in range(1, 9):
+                self.findChild(QtWidgets.QLineEdit, f"plate{i}_number").setText(
+                    labels.get(i, "") if labels is not None else ""
+                )
 
     def record_labels(self):
         plates_in_frame = dict()
