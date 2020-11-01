@@ -105,7 +105,7 @@ class LabelApp(QtWidgets.QMainWindow):
     def record_labels(self):
         plates_in_frame = dict()
         for text_box in self.findChildren(QtWidgets.QLineEdit):
-            i = int(text_box.objectName()[5])
+            i = text_box.property("plate_number")
             text = str(text_box.text())
             if text != "":
                 plates_in_frame[i] = text
