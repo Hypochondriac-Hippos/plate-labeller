@@ -31,6 +31,8 @@ class LabelApp(QtWidgets.QMainWindow):
         self.next_frame_button.clicked.connect(self.next_frame)
         self.prev_frame_button.clicked.connect(self.prev_frame)
 
+        self.labels = {}
+
     @property
     def frame_num(self):
         return self._frame_num
@@ -74,9 +76,11 @@ class LabelApp(QtWidgets.QMainWindow):
         self.frame.setPixmap(pixmap)
 
     def next_frame(self):
+        self.record_labels()
         self.frame_num += 1
 
     def prev_frame(self):
+        self.record_labels()
         self.frame_num -= 1
 
     def enable_frame_buttons(self):
@@ -84,6 +88,19 @@ class LabelApp(QtWidgets.QMainWindow):
             self.frame_num + 1 < len(self.interesting_frames)
         )
         self.prev_frame_button.setEnabled(self.frame_num > 0)
+
+    def record_labels(self):
+        plates_in_frame = dict()
+        for text_box in self.findChildren(QtWidgets.QLineEdit):
+            i = int(text_box.objectName()[5])
+            text = text_box.text()
+            if text != "":
+                plates_in_frame[i] = text
+
+        if len(plates_in_frame) == 0:
+            plates_in_frame = None
+
+        self.labels[self.interesting_frames[self.frame_num]] = plates_in_frame
 
 
 def enable_all(widget):

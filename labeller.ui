@@ -58,16 +58,6 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="copy_prev">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Copy &amp;previous</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QGridLayout" name="label_grid" rowstretch="0,0,0,0">
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
@@ -231,16 +221,6 @@
          </item>
         </layout>
        </item>
-       <item>
-        <widget class="QPushButton" name="copy_next">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Copy &amp;next</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>
@@ -285,7 +265,6 @@
  <tabstops>
   <tabstop>prev_frame_button</tabstop>
   <tabstop>next_frame_button</tabstop>
-  <tabstop>copy_prev</tabstop>
   <tabstop>plate1_number</tabstop>
   <tabstop>plate2_number</tabstop>
   <tabstop>plate3_number</tabstop>
@@ -294,7 +273,6 @@
   <tabstop>plate6_number</tabstop>
   <tabstop>plate7_number</tabstop>
   <tabstop>plate8_number</tabstop>
-  <tabstop>copy_next</tabstop>
  </tabstops>
  <resources/>
  <connections/>
