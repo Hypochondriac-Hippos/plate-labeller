@@ -33,7 +33,10 @@ class LabelApp(QtWidgets.QMainWindow):
         self.next_frame_button.clicked.connect(self.next_frame)
         self.prev_frame_button.clicked.connect(self.prev_frame)
 
-        self.labels = {}
+        for widget in self.findChildren(QtWidgets.QLineEdit):
+            widget.editingFinished.connect(self.update_label)
+
+        self.labels = {"plates": dict(), "frames": dict()}
 
     @property
     def frame_num(self):
@@ -49,7 +52,7 @@ class LabelApp(QtWidgets.QMainWindow):
         )
         self.enable_frame_buttons()
         self.show_frame()
-        self.show_labels()
+        self.show_visible()
 
     def open_video(self):
         f = QtWidgets.QFileDialog.getOpenFileName(
@@ -92,31 +95,35 @@ class LabelApp(QtWidgets.QMainWindow):
         )
         self.prev_frame_button.setEnabled(self.frame_num > 0)
 
-    def show_labels(self):
-        """If labels are already recorded, make sure the text boxes match."""
+    def update_label(self):
+        i = self.sender().property("plate number")
+        self.labels["plates"][i] = str(self.sender().text())
+
+    def show_visible(self):
+        """If labels are already recorded, make sure the check boxes match."""
         frame = self.interesting_frames[self.frame_num]
-        if frame in self.labels:
-            labels = self.labels[frame]
+        if frame in self.labels["frames"]:
+            labels = self.labels["frames"][frame]
+            print(labels)
             for i in range(1, 9):
-                self.findChild(QtWidgets.QLineEdit, f"plate{i}_number").setText(
-                    labels.get(i, "") if labels is not None else ""
+                self.findChild(QtWidgets.QCheckBox, f"checkBox_{i}").setChecked(
+                    labels is not None and i in labels
                 )
 
     def record_labels(self):
-        plates_in_frame = dict()
-        for text_box in self.findChildren(QtWidgets.QLineEdit):
-            i = text_box.property("plate_number")
-            text = str(text_box.text())
-            if text != "":
-                plates_in_frame[i] = text
+        plates_in_frame = []
+        for check_box in self.findChildren(QtWidgets.QCheckBox):
+            if check_box.isChecked():
+                plates_in_frame.append(check_box.property("plate_number"))
 
         if len(plates_in_frame) == 0:
             plates_in_frame = None
 
-        self.labels[self.interesting_frames[self.frame_num]] = plates_in_frame
+        self.labels["frames"][self.interesting_frames[self.frame_num]] = plates_in_frame
 
     def save_labels(self):
         """Write labels to a file."""
+        self.record_labels()
         with open(f"{self.file}.json", "w") as f:
             json.dump(self.labels, f)
 
