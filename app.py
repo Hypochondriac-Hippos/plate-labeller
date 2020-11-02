@@ -64,6 +64,7 @@ class LabelApp(QtWidgets.QMainWindow):
 
         self.file = f
         enable_all(self)
+        self.labels = {"plates": dict(), "frames": dict()}
 
         self.video = video.VideoCapture(self.file)
 
@@ -115,7 +116,6 @@ class LabelApp(QtWidgets.QMainWindow):
         frame = self.interesting_frames[self.frame_num]
         if frame in self.labels["frames"]:
             labels = self.labels["frames"][frame]
-            print(labels)
             for i in range(1, 9):
                 self.findChild(QtWidgets.QCheckBox, f"checkBox_{i}").setChecked(
                     labels is not None and i in labels
@@ -160,8 +160,8 @@ class PickFrames:
         yield 0
         self.indices = [0]
 
-        last_frame = frame
         while self.video.isOpened() and frame is not None:
+            last_frame = frame
             ret, frame = self.video.read()
             index = self.video.get(cv2.CAP_PROP_POS_FRAMES)
             yield index
