@@ -63,8 +63,8 @@ class LabelApp(QtWidgets.QMainWindow):
             return
 
         self.file = f
+        self.label_file = self.file + ".json"
         enable_all(self)
-        self.labels = {"plates": dict(), "frames": dict()}
 
         self.video = video.VideoCapture(self.file)
 
@@ -81,6 +81,9 @@ class LabelApp(QtWidgets.QMainWindow):
 
         self.interesting_frames = picker.indices
         self.frame_num = 0
+
+        self.labels = {"plates": dict(), "frames": dict()}
+        self.load_labels()
 
     def show_frame(self):
         frame = cv2.cvtColor(
@@ -108,7 +111,7 @@ class LabelApp(QtWidgets.QMainWindow):
         self.prev_frame_button.setEnabled(self.frame_num > 0)
 
     def update_label(self):
-        i = self.sender().property("plate number")
+        i = self.sender().property("plate_number")
         self.labels["plates"][i] = str(self.sender().text())
 
     def show_visible(self):
@@ -120,6 +123,11 @@ class LabelApp(QtWidgets.QMainWindow):
                 self.findChild(QtWidgets.QCheckBox, f"checkBox_{i}").setChecked(
                     labels is not None and i in labels
                 )
+
+    def show_plates(self):
+        """If plates are already labelled, make sure the line edits match."""
+        for plate, number in self.labels["plates"].items():
+            self.findChild(QtWidgets.QLineEdit, f"plate{plate}_number").setText(number)
 
     def record_labels(self):
         plates_in_frame = []
@@ -135,8 +143,17 @@ class LabelApp(QtWidgets.QMainWindow):
     def save_labels(self):
         """Write labels to a file."""
         self.record_labels()
-        with open(f"{self.file}.json", "w") as f:
+        with open(self.label_file, "w") as f:
             json.dump(self.labels, f)
+
+    def load_labels(self):
+        """Update labels from a file."""
+        if os.path.exists(self.label_file):
+            with open(self.label_file) as f:
+                self.labels.update(json.load(f))
+
+        self.show_visible()
+        self.show_plates()
 
 
 def enable_all(widget):
