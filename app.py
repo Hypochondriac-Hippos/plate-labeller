@@ -9,7 +9,7 @@ import os
 import sys
 
 import cv2
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from python_qt_binding import loadUi
 
 import interesting
@@ -66,8 +66,19 @@ class LabelApp(QtWidgets.QMainWindow):
         enable_all(self)
 
         self.video = video.VideoCapture(self.file)
-        self.interesting_frames = pick_frames(self.video)
 
+        progress = QtWidgets.QProgressDialog(
+            "Getting interesting frames...", "Stop", 0, len(self.video), self
+        )
+        progress.setModal(True)
+
+        picker = PickFrames(self.video)
+        for analyzed_frame in picker:
+            progress.setValue(analyzed_frame)
+            if progress.wasCanceled():
+                break
+
+        self.interesting_frames = picker.indices
         self.frame_num = 0
 
     def show_frame(self):
@@ -135,20 +146,31 @@ def enable_all(widget):
         enable_all(child)
 
 
+class PickFrames:
+    """Pick interesting frames from video, yielding a progress indicator along the way."""
+
+    def __init__(self, video):
+        self.video = video
+        self.indices = None
+
+    def __iter__(self):
+        ret, frame = self.video.read()
+        if not ret:
+            raise RuntimeError("Couldn't read any frames")
+        yield 0
+        self.indices = [0]
+
+        last_frame = frame
+        while self.video.isOpened() and frame is not None:
+            ret, frame = self.video.read()
+            index = self.video.get(cv2.CAP_PROP_POS_FRAMES)
+            yield index
+            if ret and not interesting.is_similar(last_frame, frame):
+                self.indices.append(index)
+
+
 def pick_frames(video):
     """Return a list of indices of interesting frames."""
-    ret, frame = video.read()
-    if not ret:
-        raise RuntimeError("Couldn't read any frames")
-    indices = [0]
-    i, frame = interesting.read_to_interesting(video, frame)
-    l = len(video)
-    while frame is not None:
-        print(f"\r{i} / {l}", end="")
-        indices.append(i)
-        i, frame = interesting.read_to_interesting(video, frame)
-
-    return indices
 
 
 if __name__ == "__main__":
