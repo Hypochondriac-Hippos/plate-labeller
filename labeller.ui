@@ -14,356 +14,350 @@
    <string>Plate Labeller</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>838</width>
-      <height>541</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="prev_frame_button">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;&lt;</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="frame">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="next_frame_button">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;&gt;</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Readable:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_1">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;1</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_2">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;2</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>2</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_3">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;3</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>3</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_4">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;4</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>4</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_5">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;5</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>5</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_6">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;6</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>6</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_7">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;7</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>7</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_8">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>&amp;8</string>
-         </property>
-         <property name="plate_number" stdset="0">
-          <number>8</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <layout class="QGridLayout" name="label_grid" rowstretch="0,0,0,0">
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>2</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="plate2_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>2</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="6">
-          <widget class="QLineEdit" name="plate6_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>6</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="plate1_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>1</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="5">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>5</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>3</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="plate3_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>3</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>4</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="plate4_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>4</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="6">
-          <widget class="QLineEdit" name="plate5_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>5</number>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="6">
-          <widget class="QLineEdit" name="plate7_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>7</number>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="6">
-          <widget class="QLineEdit" name="plate8_number">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="inputMask">
-            <string>&gt;AA99</string>
-           </property>
-           <property name="placeholderText">
-            <string>AB12</string>
-           </property>
-           <property name="plate_number" stdset="0">
-            <number>8</number>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="5">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>6</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="5">
-          <widget class="QLabel" name="label_7">
-           <property name="text">
-            <string>7</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="5">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>8</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="prev_frame_button">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;&lt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="frame">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="next_frame_button">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Readable:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;1</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;2</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>2</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_3">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;3</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_4">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;4</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>4</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_5">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;5</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_6">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;6</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>6</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_7">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;7</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>7</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_8">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>&amp;8</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>8</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QGridLayout" name="label_grid" rowstretch="0,0,0,0">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>2</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="plate2_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>2</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLineEdit" name="plate6_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>6</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="plate1_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>5</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="plate3_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>3</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>4</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="plate4_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QLineEdit" name="plate5_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QLineEdit" name="plate7_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>7</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="6">
+           <widget class="QLineEdit" name="plate8_number">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="inputMask">
+             <string>&gt;AA99</string>
+            </property>
+            <property name="placeholderText">
+             <string>AB12</string>
+            </property>
+            <property name="plate_number" stdset="0">
+             <number>8</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>6</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>7</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="5">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>8</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
