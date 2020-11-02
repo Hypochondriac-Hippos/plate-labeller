@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>865</width>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,6 +66,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_1">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;1</string>
          </property>
@@ -76,6 +79,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_2">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;2</string>
          </property>
@@ -86,6 +92,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;3</string>
          </property>
@@ -96,6 +105,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;4</string>
          </property>
@@ -106,6 +118,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_5">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;5</string>
          </property>
@@ -116,6 +131,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_6">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;6</string>
          </property>
@@ -126,6 +144,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_7">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;7</string>
          </property>
@@ -136,6 +157,9 @@
        </item>
        <item>
         <widget class="QCheckBox" name="checkBox_8">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>&amp;8</string>
          </property>
@@ -346,7 +370,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>865</width>
      <height>22</height>
     </rect>
    </property>
