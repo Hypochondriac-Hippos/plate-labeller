@@ -38,6 +38,11 @@ class LabelApp(QtWidgets.QMainWindow):
 
         self.labels = {"plates": dict(), "frames": dict()}
 
+        self.position.sliderMoved.connect(self.jump_to_frame)
+
+    def jump_to_frame(self):
+        self.frame_num = self.position.value()
+
     @property
     def frame_num(self):
         return self._frame_num
@@ -50,6 +55,10 @@ class LabelApp(QtWidgets.QMainWindow):
         self.setWindowTitle(
             f"{os.path.basename(self.file)} [{self._frame_num + 1}/{len(self.interesting_frames)}]"
         )
+
+        if self._frame_num != self.position.value():
+            self.position.setValue(self._frame_num)
+
         self.enable_frame_buttons()
         self.show_frame()
         self.show_visible()
@@ -80,6 +89,7 @@ class LabelApp(QtWidgets.QMainWindow):
                 break
 
         self.interesting_frames = picker.indices
+        self.position.setMaximum(len(self.interesting_frames))
         self.frame_num = 0
 
         self.labels = {"plates": dict(), "frames": dict()}
