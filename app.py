@@ -65,7 +65,7 @@ class LabelApp(QtWidgets.QMainWindow):
 
     def open_video(self):
         f = QtWidgets.QFileDialog.getOpenFileName(
-            None, "Open Video", VIDEO_LOCATION, "Video Files (*.avi)"
+            None, "Open Video", VIDEO_LOCATION, "Video Files (*.*)"
         )[0]
 
         if f == "":
