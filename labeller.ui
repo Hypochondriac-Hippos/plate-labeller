@@ -65,6 +65,9 @@
           <property name="text">
            <string>None (&amp;0)</string>
           </property>
+          <property name="plate_number" stdset="0">
+           <number>0</number>
+          </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
@@ -77,6 +80,9 @@
           </property>
           <property name="text">
            <string>&amp;1</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>1</number>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
@@ -91,6 +97,9 @@
           <property name="text">
            <string>&amp;2</string>
           </property>
+          <property name="plate_number" stdset="0">
+           <number>2</number>
+          </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
@@ -103,6 +112,9 @@
           </property>
           <property name="text">
            <string>&amp;3</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>3</number>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
@@ -117,6 +129,9 @@
           <property name="text">
            <string>&amp;4</string>
           </property>
+          <property name="plate_number" stdset="0">
+           <number>4</number>
+          </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
@@ -129,6 +144,9 @@
           </property>
           <property name="text">
            <string>&amp;5</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>5</number>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
@@ -143,6 +161,9 @@
           <property name="text">
            <string>&amp;6</string>
           </property>
+          <property name="plate_number" stdset="0">
+           <number>6</number>
+          </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
@@ -156,6 +177,9 @@
           <property name="text">
            <string>&amp;7</string>
           </property>
+          <property name="plate_number" stdset="0">
+           <number>7</number>
+          </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
@@ -168,6 +192,9 @@
           </property>
           <property name="text">
            <string>&amp;8</string>
+          </property>
+          <property name="plate_number" stdset="0">
+           <number>8</number>
           </property>
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>

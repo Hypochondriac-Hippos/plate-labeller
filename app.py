@@ -118,11 +118,10 @@ class LabelApp(QtWidgets.QMainWindow):
         """If labels are already recorded, make sure the check boxes match."""
         frame = self.interesting_frames[self.frame_num]
         if frame in self.labels["frames"]:
-            labels = self.labels["frames"][frame]
-            for i in range(1, 9):
-                self.findChild(QtWidgets.QRadioButton, f"radioButton_{i}").setChecked(
-                    labels is not None and i in labels
-                )
+            plate = self.labels["frames"][frame]
+            self.findChild(QtWidgets.QRadioButton, f"radioButton_{plate}").setChecked(
+                True
+            )
 
     def show_plates(self):
         """If plates are already labelled, make sure the line edits match."""
@@ -130,15 +129,12 @@ class LabelApp(QtWidgets.QMainWindow):
             self.findChild(QtWidgets.QLineEdit, f"plate{plate}_number").setText(number)
 
     def record_labels(self):
-        plates_in_frame = []
+        plate_in_frame = None
         for check_box in self.findChildren(QtWidgets.QRadioButton):
             if check_box.isChecked():
-                plates_in_frame.append(check_box.property("plate_number"))
+                plate_in_frame = int(check_box.property("plate_number"))
 
-        if len(plates_in_frame) == 0:
-            plates_in_frame = None
-
-        self.labels["frames"][self.interesting_frames[self.frame_num]] = plates_in_frame
+        self.labels["frames"][self.interesting_frames[self.frame_num]] = plate_in_frame
 
     def save_labels(self):
         """Write labels to a file."""
