@@ -120,7 +120,7 @@ class LabelApp(QtWidgets.QMainWindow):
         if frame in self.labels["frames"]:
             labels = self.labels["frames"][frame]
             for i in range(1, 9):
-                self.findChild(QtWidgets.QCheckBox, f"checkBox_{i}").setChecked(
+                self.findChild(QtWidgets.QRadioButton, f"radioButton_{i}").setChecked(
                     labels is not None and i in labels
                 )
 
@@ -131,7 +131,7 @@ class LabelApp(QtWidgets.QMainWindow):
 
     def record_labels(self):
         plates_in_frame = []
-        for check_box in self.findChildren(QtWidgets.QCheckBox):
+        for check_box in self.findChildren(QtWidgets.QRadioButton):
             if check_box.isChecked():
                 plates_in_frame.append(check_box.property("plate_number"))
 
